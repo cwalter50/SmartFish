@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30F2ECBF331E57C7ABB04CC2 /* Pods_SmartFish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8AF85BCD2303B36C20E568F /* Pods_SmartFish.framework */; };
 		838DDBFA2152DA3800FB6C1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DDBF92152DA3800FB6C1B /* AppDelegate.swift */; };
 		838DDBFC2152DA3800FB6C1B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838DDBFB2152DA3800FB6C1B /* ViewController.swift */; };
 		838DDBFF2152DA3800FB6C1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838DDBFD2152DA3800FB6C1B /* Main.storyboard */; };
 		838DDC022152DA3800FB6C1B /* SmartFish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 838DDC002152DA3800FB6C1B /* SmartFish.xcdatamodeld */; };
 		838DDC042152DA3800FB6C1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838DDC032152DA3800FB6C1B /* Assets.xcassets */; };
 		838DDC072152DA3800FB6C1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838DDC052152DA3800FB6C1B /* LaunchScreen.storyboard */; };
+		838DDC0F2152DA6A00FB6C1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 838DDC0E2152DA6A00FB6C1B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		546B1153D23726ECBD63C022 /* Pods-SmartFish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartFish.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartFish/Pods-SmartFish.release.xcconfig"; sourceTree = "<group>"; };
+		54CB3279B6AC376C211751AC /* Pods-SmartFish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartFish.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartFish/Pods-SmartFish.debug.xcconfig"; sourceTree = "<group>"; };
 		838DDBF62152DA3800FB6C1B /* SmartFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838DDBF92152DA3800FB6C1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838DDBFB2152DA3800FB6C1B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		838DDC032152DA3800FB6C1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		838DDC062152DA3800FB6C1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		838DDC082152DA3800FB6C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		838DDC0E2152DA6A00FB6C1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C8AF85BCD2303B36C20E568F /* Pods_SmartFish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartFish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30F2ECBF331E57C7ABB04CC2 /* Pods_SmartFish.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042E8F194D496408C9C4ECC9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54CB3279B6AC376C211751AC /* Pods-SmartFish.debug.xcconfig */,
+				546B1153D23726ECBD63C022 /* Pods-SmartFish.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		70192D600E2ED9384FCBD123 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C8AF85BCD2303B36C20E568F /* Pods_SmartFish.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		838DDBED2152DA3800FB6C1B = {
 			isa = PBXGroup;
 			children = (
 				838DDBF82152DA3800FB6C1B /* SmartFish */,
 				838DDBF72152DA3800FB6C1B /* Products */,
+				042E8F194D496408C9C4ECC9 /* Pods */,
+				70192D600E2ED9384FCBD123 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +88,7 @@
 				838DDC032152DA3800FB6C1B /* Assets.xcassets */,
 				838DDC052152DA3800FB6C1B /* LaunchScreen.storyboard */,
 				838DDC082152DA3800FB6C1B /* Info.plist */,
+				838DDC0E2152DA6A00FB6C1B /* GoogleService-Info.plist */,
 				838DDC002152DA3800FB6C1B /* SmartFish.xcdatamodeld */,
 			);
 			path = SmartFish;
@@ -74,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 838DDC0B2152DA3800FB6C1B /* Build configuration list for PBXNativeTarget "SmartFish" */;
 			buildPhases = (
+				29C542ECA11DE14CC1CC1C2F /* [CP] Check Pods Manifest.lock */,
 				838DDBF22152DA3800FB6C1B /* Sources */,
 				838DDBF32152DA3800FB6C1B /* Frameworks */,
 				838DDBF42152DA3800FB6C1B /* Resources */,
+				9767F4007B54544D8E9358A1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,12 +155,64 @@
 			buildActionMask = 2147483647;
 			files = (
 				838DDC072152DA3800FB6C1B /* LaunchScreen.storyboard in Resources */,
+				838DDC0F2152DA6A00FB6C1B /* GoogleService-Info.plist in Resources */,
 				838DDC042152DA3800FB6C1B /* Assets.xcassets in Resources */,
 				838DDBFF2152DA3800FB6C1B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		29C542ECA11DE14CC1CC1C2F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartFish-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9767F4007B54544D8E9358A1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SmartFish/Pods-SmartFish-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartFish/Pods-SmartFish-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		838DDBF22152DA3800FB6C1B /* Sources */ = {
@@ -282,6 +363,7 @@
 		};
 		838DDC0C2152DA3800FB6C1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54CB3279B6AC376C211751AC /* Pods-SmartFish.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +382,7 @@
 		};
 		838DDC0D2152DA3800FB6C1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 546B1153D23726ECBD63C022 /* Pods-SmartFish.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
