@@ -119,8 +119,6 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
 
         color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: CGFloat(alpha/100)) // this will also update the backgroundview with the didSet method
         
-
-        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -174,6 +172,14 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
         updateColorView()
         
         // figure out what to do for hex textfield
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     

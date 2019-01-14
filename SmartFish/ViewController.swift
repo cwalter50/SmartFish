@@ -52,6 +52,28 @@ class ViewController: UIViewController {
         
     }
     
+    // this is used to recieve the color from colorPickerView.
+    @IBAction func unwindToThisView(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? ColorPickerViewController {
+            let color = sourceViewController.color
+            colorButton.backgroundColor = color
+            
+            let tuple = color?.rgb()
+            let red = tuple?.red ?? 0
+            let green = tuple?.green ?? 0
+            let blue = tuple?.blue ?? 0
+            if red + blue + green > 600
+            {
+                colorButton.setTitleColor(UIColor.black, for: .normal)
+            }
+            else
+            {
+                colorButton.setTitleColor(UIColor.white, for: .normal)
+            }
+//            dataRecieved = sourceViewController.dataPassed
+        }
+    }
+    
     @IBAction func colorButtonTapped(_ sender: UIButton) {
     }
     
