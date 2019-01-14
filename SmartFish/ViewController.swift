@@ -15,6 +15,10 @@ class ViewController: UIViewController {
     // MARK: Properties
     var isOn = false
     
+    // MARK: Outlets
+    @IBOutlet weak var onOffButton: UIButton!
+    @IBOutlet weak var colorButton: UIButton!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -48,5 +52,16 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func colorButtonTapped(_ sender: UIButton) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "colorPickerSegue"
+        {
+            let destVC = segue.destination as? ColorPickerViewController
+            destVC?.color = colorButton.backgroundColor
+            
+        }
+    }
 }
 

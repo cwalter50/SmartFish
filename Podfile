@@ -10,5 +10,4 @@ target 'SmartFish' do
   pod 'Firebase/Database'
 
 
-
 end
