@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class ColorPickerViewController: UIViewController, UITextFieldDelegate {
+    
+    
 
     // MARK: Outlets
     @IBOutlet weak var colorView: UIView!
@@ -16,14 +19,15 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var redSlider: UISlider!
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
-    @IBOutlet weak var alphaSlider: UISlider!
+    @IBOutlet weak var brightnessSlider: UISlider!
 
     @IBOutlet weak var redTF: UITextField!
     @IBOutlet weak var greenTF: UITextField!
     @IBOutlet weak var blueTF: UITextField!
-    @IBOutlet weak var alphaTF: UITextField!
+    @IBOutlet weak var brightnessTF: UITextField!
     @IBOutlet weak var hexTF: UITextField!
     
+    // MARK: Properties
     var color: UIColor? {
         didSet {
             if let myColor = color, let theView = colorView
@@ -43,19 +47,22 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
         redTF.text = "\(myTuple?.red ?? 0)"
         greenTF.text = "\(myTuple?.green ?? 0)"
         blueTF.text = "\(myTuple?.blue ?? 0)"
-        alphaTF.text = "\(myTuple?.alpha ?? 0)"
+        
+        var alpha = myTuple?.alpha ?? 0
+        alpha = alpha / 255 * 100
+        brightnessTF.text = "\(alpha)"
         
         redSlider.value = Float(myTuple?.red ?? 0)
         greenSlider.value = Float(myTuple?.green ?? 0)
         blueSlider.value = Float(myTuple?.blue ?? 0)
-        alphaSlider.value = Float(myTuple?.alpha ?? 0)
+        brightnessSlider.value = Float(alpha)
         
         updateColorView()
         
         redTF.addTarget(self, action: #selector(textFieldDidChange(textField: )), for: .editingChanged)
         greenTF.addTarget(self, action: #selector(textFieldDidChange(textField: )), for: .editingChanged)
         blueTF.addTarget(self, action: #selector(textFieldDidChange(textField: )), for: .editingChanged)
-        alphaTF.addTarget(self, action: #selector(textFieldDidChange(textField: )), for: .editingChanged)
+        brightnessTF.addTarget(self, action: #selector(textFieldDidChange(textField: )), for: .editingChanged)
     }
     
     @objc func textFieldDidChange(textField: UITextField) {
@@ -66,8 +73,8 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
             updateSlider(slider: greenSlider, textField: greenTF)
         case blueTF:
             updateSlider(slider: blueSlider, textField: blueTF)
-        case alphaTF:
-            updateSlider(slider: alphaSlider, textField: alphaTF)
+        case brightnessTF:
+            updateSlider(slider: brightnessSlider, textField: brightnessTF)
         default:
             print("Error matching sliders")
         }
@@ -101,8 +108,8 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
             greenTF.text = "\(Int(sender.value))"
         case blueSlider:
             blueTF.text = "\(Int(sender.value))"
-        case alphaSlider:
-            alphaTF.text = "\(Int(sender.value))"
+        case brightnessSlider:
+            brightnessTF.text = "\(Int(sender.value))"
         default:
             print("slider values are different")
         }
@@ -112,12 +119,18 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
     
     func updateColorView()
     {
-        guard let red = Float(redTF.text!), let green = Float(greenTF.text!), let blue = Float(blueTF.text!), let alpha = Float(alphaTF.text!) else {
+        guard let red = Float(redTF.text!), let green = Float(greenTF.text!), let blue = Float(blueTF.text!), let alpha = Float(brightnessTF.text!) else {
             print("error with colors")
             return
             }
 
         color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: CGFloat(alpha/100)) // this will also update the backgroundview with the didSet method
+        
+        // update firebase
+        let ref = Database.database().reference()
+        let post: [String: Any] = ["red": Int(red), "green": Int(green), "blue": Int(blue), "brightness": Int(alpha) ]
+        ref.child("led").updateChildValues(post) // this just overwrites the values in the post
+//        ref.child("led").setValue(post) // this overwrites everything and deletes
         
     }
     
@@ -145,7 +158,7 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
                 textField.text = "0" // in case the value is not a valid number
             }
         }
-        else if (textField.isEqual(alphaTF))
+        else if (textField.isEqual(brightnessTF))
         {
             // check to make sure that value is below 100,
             if let val = Int(textField.text!)

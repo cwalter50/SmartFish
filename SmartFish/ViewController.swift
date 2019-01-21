@@ -22,16 +22,61 @@ class ViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        led(state: "OFF")
+        self.onOffButton.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.7333333333, blue: 0.4352941176, alpha: 1)
         
+        // get firebase data
+        let ref = Database.database().reference()
+        ref.child("led").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+
+            let value = snapshot.value as? NSDictionary
+            let state = value?["state"] as? String ?? ""
+            let red = value?["red"] as? Int ?? 255
+            let blue = value?["blue"] as? Int ?? 255
+            let green = value?["green"] as? Int ?? 255
+            let brightness = value?["brightness"] as? Int ?? 100
+            
+            //print("red: \(red) + blue: \(blue) + green: \(green) + brightness: \(brightness)")
+            
+            // update buttons
+            self.onOffButton.setTitle(state, for: .normal)
+            if state == "ON"
+            {
+                self.isOn = true
+                self.onOffButton.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.7333333333, blue: 0.4352941176, alpha: 1)
+            }
+            else
+            {
+                self.isOn = false
+                self.onOffButton.backgroundColor = UIColor.red
+            }
+             // update color button
+            let color = UIColor(red: CGFloat(Float(red)/255), green: CGFloat(Float(green)/255), blue: CGFloat(Float(blue)/255), alpha: CGFloat(Float(brightness)/100))
+            self.colorButton.backgroundColor = color
+            
+            if red + blue + green > 600 || brightness < 25
+            {
+                self.colorButton.setTitleColor(UIColor.black, for: .normal)
+            }
+            else
+            {
+                self.colorButton.setTitleColor(UIColor.white, for: .normal)
+            }
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
         
     }
     
+    // update Firebase
     func led(state:String)
     {
         let ref = Database.database().reference()
         let post: [String: AnyObject] = ["state": state as AnyObject]
-        ref.child("led").setValue(post)
+        ref.child("led").updateChildValues(post) // this updates values in post, but does not delete.
+//        ref.child("led").setValue(post) // this updates and deletes values not in post.
     }
 
 
@@ -62,7 +107,8 @@ class ViewController: UIViewController {
             let red = tuple?.red ?? 0
             let green = tuple?.green ?? 0
             let blue = tuple?.blue ?? 0
-            if red + blue + green > 600
+            let alpha = tuple?.alpha ?? 0
+            if red + blue + green > 600 || alpha < 50
             {
                 colorButton.setTitleColor(UIColor.black, for: .normal)
             }
@@ -82,6 +128,10 @@ class ViewController: UIViewController {
         {
             let destVC = segue.destination as? ColorPickerViewController
             destVC?.color = colorButton.backgroundColor
+            // also pass the state of led. ON or OFF
+            
+
+            
             
         }
     }

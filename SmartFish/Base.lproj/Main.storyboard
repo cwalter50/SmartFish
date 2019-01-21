@@ -206,7 +206,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5Iw-1u-YVq">
                                         <rect key="frame" x="0.0" y="266" width="343" height="32"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALPHA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FdA-LU-V22">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BRIGHT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FdA-LU-V22">
                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="70" id="FYe-WN-TMc"/>
@@ -223,7 +223,7 @@
                                                     <action selector="sliderChanged:" destination="H9j-Su-inw" eventType="valueChanged" id="lIs-8q-V7i"/>
                                                 </connections>
                                             </slider>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ALPHA" textAlignment="right" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-bH-Cvj">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BRIGHT" textAlignment="right" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-bH-Cvj">
                                                 <rect key="frame" x="273" y="0.0" width="70" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="70" id="3MJ-aQ-9yb"/>
@@ -292,10 +292,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="alphaSlider" destination="RXa-XW-sO8" id="TBY-9O-QVH"/>
-                        <outlet property="alphaTF" destination="3QK-bH-Cvj" id="7s3-C0-DW9"/>
                         <outlet property="blueSlider" destination="70F-Ig-jtt" id="XbN-GA-Xjs"/>
                         <outlet property="blueTF" destination="OOr-sI-nU9" id="Yud-u6-g4p"/>
+                        <outlet property="brightnessSlider" destination="RXa-XW-sO8" id="pWF-n5-OYL"/>
+                        <outlet property="brightnessTF" destination="3QK-bH-Cvj" id="u9x-QV-MlZ"/>
                         <outlet property="colorView" destination="eaa-gd-E3H" id="Ihk-au-L6C"/>
                         <outlet property="greenSlider" destination="0rd-CQ-JFQ" id="oCZ-TF-0nh"/>
                         <outlet property="greenTF" destination="kiw-uo-Nxu" id="RFQ-p6-bST"/>
