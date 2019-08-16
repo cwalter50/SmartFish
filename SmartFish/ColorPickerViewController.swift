@@ -11,9 +11,6 @@ import Firebase
 
 class ColorPickerViewController: UIViewController, UITextFieldDelegate {
     
-    // testing github
-    // testing source control
-
     // MARK: Outlets
     @IBOutlet weak var colorView: UIView!
     
@@ -21,7 +18,7 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     @IBOutlet weak var brightnessSlider: UISlider!
-
+    
     @IBOutlet weak var redTF: UITextField!
     @IBOutlet weak var greenTF: UITextField!
     @IBOutlet weak var blueTF: UITextField!
@@ -50,9 +47,9 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
         blueTF.text = "\(myTuple?.blue ?? 0)"
         
         var alpha = myTuple?.alpha ?? 0
-        alpha = alpha / 255 * 100
+        alpha = Int(Double(alpha) / 255.0 * 100)
         brightnessTF.text = "\(alpha)"
-        
+        //
         redSlider.value = Float(myTuple?.red ?? 0)
         greenSlider.value = Float(myTuple?.green ?? 0)
         blueSlider.value = Float(myTuple?.blue ?? 0)
@@ -94,11 +91,11 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-
-    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
     
+    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
+        
         self.navigationController?.popViewController(animated: true)
-
+        
     }
     
     @IBAction func sliderChanged(_ sender: UISlider) {
@@ -123,15 +120,15 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
         guard let red = Float(redTF.text!), let green = Float(greenTF.text!), let blue = Float(blueTF.text!), let alpha = Float(brightnessTF.text!) else {
             print("error with colors")
             return
-            }
-
+        }
+        
         color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: CGFloat(alpha/100)) // this will also update the backgroundview with the didSet method
         
         // update firebase
         let ref = Database.database().reference()
         let post: [String: Any] = ["red": Int(red), "green": Int(green), "blue": Int(blue), "brightness": Int(alpha) ]
         ref.child("led").updateChildValues(post) // this just overwrites the values in the post
-//        ref.child("led").setValue(post) // this overwrites everything and deletes
+        //        ref.child("led").setValue(post) // this overwrites everything and deletes
         
     }
     
@@ -200,5 +197,5 @@ class ColorPickerViewController: UIViewController, UITextFieldDelegate {
     
     
     
-
+    
 }

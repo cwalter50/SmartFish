@@ -11,7 +11,7 @@ import Firebase
 
 
 class ViewController: UIViewController {
-
+    
     // MARK: Properties
     var isOn = false
     
@@ -22,25 +22,34 @@ class ViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.onOffButton.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.7333333333, blue: 0.4352941176, alpha: 1)
+        self.onOffButton.backgroundColor = UIColor.darkGray
         
         // get firebase data
         let ref = Database.database().reference()
         ref.child("led").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-
+            
             let value = snapshot.value as? NSDictionary
-            let state = value?["state"] as? String ?? ""
+            let state = value?["state"] as? Int ?? 0
             let red = value?["red"] as? Int ?? 255
             let blue = value?["blue"] as? Int ?? 255
             let green = value?["green"] as? Int ?? 255
             let brightness = value?["brightness"] as? Int ?? 100
             
             //print("red: \(red) + blue: \(blue) + green: \(green) + brightness: \(brightness)")
+            var stateString = "OFF"
+            if state == 1
+            {
+                stateString = "ON"
+            }
+            else
+            {
+                stateString = "OFF"
+            }
             
             // update buttons
-            self.onOffButton.setTitle(state, for: .normal)
-            if state == "ON"
+            self.onOffButton.setTitle(stateString, for: .normal)
+            if state == 1
             {
                 self.isOn = true
                 self.onOffButton.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.7333333333, blue: 0.4352941176, alpha: 1)
@@ -48,9 +57,9 @@ class ViewController: UIViewController {
             else
             {
                 self.isOn = false
-                self.onOffButton.backgroundColor = UIColor.red
+                self.onOffButton.backgroundColor = UIColor.darkGray
             }
-             // update color button
+            // update color button
             let color = UIColor(red: CGFloat(Float(red)/255), green: CGFloat(Float(green)/255), blue: CGFloat(Float(blue)/255), alpha: CGFloat(Float(brightness)/100))
             self.colorButton.backgroundColor = color
             
@@ -71,27 +80,27 @@ class ViewController: UIViewController {
     }
     
     // update Firebase
-    func led(state:String)
+    func led(state:Int)
     {
         let ref = Database.database().reference()
         let post: [String: AnyObject] = ["state": state as AnyObject]
         ref.child("led").updateChildValues(post) // this updates values in post, but does not delete.
-//        ref.child("led").setValue(post) // this updates and deletes values not in post.
+        //        ref.child("led").setValue(post) // this updates and deletes values not in post.
     }
-
-
+    
+    
     @IBAction func onButtonTapped(_ sender: UIButton)
     {
         if isOn
         {
             sender.setTitle("OFF", for: .normal)
-            sender.backgroundColor = UIColor.red
-            led(state: "OFF")
+            sender.backgroundColor = UIColor.darkGray
+            led(state: 0)
         } else
         {
             sender.setTitle("ON", for: .normal)
             sender.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.7333333333, blue: 0.4352941176, alpha: 1)
-            led(state: "ON")
+            led(state: 1)
         }
         isOn = !isOn
         
@@ -116,7 +125,7 @@ class ViewController: UIViewController {
             {
                 colorButton.setTitleColor(UIColor.white, for: .normal)
             }
-//            dataRecieved = sourceViewController.dataPassed
+            //            dataRecieved = sourceViewController.dataPassed
         }
     }
     
@@ -130,7 +139,7 @@ class ViewController: UIViewController {
             destVC?.color = colorButton.backgroundColor
             // also pass the state of led. ON or OFF
             
-
+            
             
             
         }
