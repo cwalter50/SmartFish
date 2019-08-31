@@ -13,17 +13,23 @@ import Firebase
 class ViewController: UIViewController {
     
     // MARK: Properties
-    var isOn = false
+    var ledState = 0 // 0 = off, 1 = on, 2 = earthMode
+//    var isOn = false
     
     // MARK: Outlets
     @IBOutlet weak var onOffButton: UIButton!
     @IBOutlet weak var colorButton: UIButton!
+    @IBOutlet weak var helperTextView: UITextView!
     
     override func viewDidLoad()
     {
+        self.title = "SmartFish"
         super.viewDidLoad()
         self.onOffButton.backgroundColor = UIColor.darkGray
+        onOffButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        // set up helper textView
+        helperTextView.text = "OFF = Lights Off\nON = Lights On and set to COlor and Brightness\nEarthMode = Lights On from 6 AM to 8 PM. Off otherwise. Color is set to color. Brightness will adjust based on height of Sun"
         // get firebase data
         let ref = Database.database().reference()
         ref.child("led").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -42,6 +48,10 @@ class ViewController: UIViewController {
             {
                 stateString = "ON"
             }
+            else if state == 2
+            {
+                stateString = "EarthMode"
+            }
             else
             {
                 stateString = "OFF"
@@ -49,14 +59,19 @@ class ViewController: UIViewController {
             
             // update buttons
             self.onOffButton.setTitle(stateString, for: .normal)
+            self.ledState = state
             if state == 1
             {
-                self.isOn = true
+
                 self.onOffButton.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.7333333333, blue: 0.4352941176, alpha: 1)
+            }
+            else if state == 2
+            {
+                self.onOffButton.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
             }
             else
             {
-                self.isOn = false
+
                 self.onOffButton.backgroundColor = UIColor.darkGray
             }
             // update color button
@@ -91,18 +106,26 @@ class ViewController: UIViewController {
     
     @IBAction func onButtonTapped(_ sender: UIButton)
     {
-        if isOn
+        if ledState == 1
         {
+            sender.setTitle("EarthMode", for: .normal)
+            sender.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+            led(state: 2)
+        }
+        else if ledState == 2 {
             sender.setTitle("OFF", for: .normal)
             sender.backgroundColor = UIColor.darkGray
             led(state: 0)
-        } else
+        }
+        else
         {
             sender.setTitle("ON", for: .normal)
             sender.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.7333333333, blue: 0.4352941176, alpha: 1)
             led(state: 1)
         }
-        isOn = !isOn
+        
+        // update ledState
+        ledState = (ledState + 1 ) % 3
         
     }
     
